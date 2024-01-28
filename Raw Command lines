@@ -1,0 +1,21 @@
+##Command Lines Discussed in Class in a Raw Format  
+
+1)sudo apt get update
+2) sudo apt install screen
+3)sudo apt install htop
+4)htop
+5) conda 
+6) mkdir -p ~/miniconda3  
+7)mkdir -p ~/miniconda3
+8)wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+9)bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+10)rm -rf ~/miniconda3/miniconda.sh 
+11)~/miniconda3/bin/conda init bash
+12)source ~/.bashrc
+13)conda create --name python=3.9
+14)conda create --name env python=3.9
+15) conda activate env 
+16) conda install -c conda-forge notebook 
+17) conda install -c conda-forge nb_conda_kernels 
+18)conda install nb_conda
+19)screen -S env
