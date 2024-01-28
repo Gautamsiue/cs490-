@@ -1,0 +1,51 @@
+# Update the system
+sudo apt-get update
+
+# Install required packages
+sudo apt-get install -y screen htop
+
+# Check if Conda is installed
+if ! command -v conda &> /dev/null; then
+    echo "Conda is not installed. Please install Miniconda or Anaconda first."
+    exit 1
+fi
+
+# Create Miniconda folder
+mkdir -p ~/miniconda3
+
+# Download and install Miniconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+
+# Remove the Miniconda installation script
+rm -f ~/miniconda3/miniconda.sh
+
+# Initialize Miniconda for bash
+~/miniconda3/bin/conda init bash
+source ~/.bashrc
+
+# Create a conda environment (optional)
+~/miniconda3/bin/conda create --name env python=3.9
+
+# Activate the conda environment
+~/miniconda3/bin/conda activate env
+
+# Install Jupyter Notebook and related packages
+~/miniconda3/bin/conda install -c conda-forge notebook
+~/miniconda3/bin/conda install -c conda-forge nb_conda_kernels
+~/miniconda3/bin/conda install nb_conda
+
+# Export the environment to requirements.yml
+~/miniconda3/bin/conda env export --name env > requirements.yml
+
+# Push the requirements.yml file to GitHub (assuming the repository is already cloned)
+github_repo_path="*** Path to the repository will be provided over here ***"
+cd "$github_repo_path" || exit 1
+git add requirements.yml
+git commit -m "Add requirements.yml for conda environment"
+git push origin main
+
+# Start a new screen session named 'env'
+screen -S env
+
+echo "Miniconda installed, initialized, environment created, YAML file exported, and screen session started successfully."
